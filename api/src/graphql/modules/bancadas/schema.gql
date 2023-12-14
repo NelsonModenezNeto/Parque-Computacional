@@ -1,0 +1,35 @@
+type Bancada {
+  idBancada: ID!
+  local: String!
+  status: Int!
+  apelido: String!
+}
+
+type Query {
+  bancadas: [Bancada]!
+  bancada(idBancada: ID!): Bancada!
+  bancadasByLocal(local: String!): [Bancada]!
+  bancadasByStatus(status: String!): [Bancada]!
+  searchBancadas(filter: BancadaFilter): [Bancada]
+  totalBancadasOp: Int!
+}
+
+input DadosBancada {
+  local: String!
+  status: Int!
+  apelido: String!
+}
+
+input BancadaFilter {
+  idBancada: ID
+  local: String
+  status: Int
+  apelido: String
+}
+
+type Mutation {
+  createBancada(data: DadosBancada!): Bancada!
+  updateBancada(idBancada: ID!, data: DadosBancada!): Bancada!
+  deleteBancada(idBancada: ID!): Boolean!
+  ativarBancada(idBancada: ID, status: String): Bancada!
+}

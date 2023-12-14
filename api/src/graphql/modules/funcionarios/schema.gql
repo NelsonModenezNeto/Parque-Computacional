@@ -1,0 +1,46 @@
+type Funcionario {
+    idFuncionario: ID!
+    status: Int!
+    nome: String!
+    tipo: Int!
+    email: String!
+    idSession: String
+    idGoogle: String
+}
+
+type Query {
+    funcionarios: [Funcionario]
+    funcionario(idFuncionario: ID!): Funcionario
+    funcionariosByNome(nome: String!): [Funcionario]
+    funcionariosByEmail(email: String!): [Funcionario]
+    funcionariosByStatus(status: String!): [Funcionario]
+    searchFuncionarios(filter: FuncionarioFilter): [Funcionario]
+    confereLogin(email: String!): Funcionario
+    confereSession(idSession: String!): Funcionario
+    authenticator(idGoogle: String!): Boolean!
+    totalFuncionarios: Int!
+}
+
+input FuncionarioFilter {
+    idFuncionario: ID
+    status: Int
+    nome: String
+    tipo: Int
+    email: String
+}
+
+input DadosFuncionario{
+    status: Int!
+    nome: String!
+    tipo: Int!
+    email: String!
+}
+
+type Mutation {
+    createFuncionario(data: DadosFuncionario!): Funcionario!
+    updateFuncionario(idFuncionario: ID!, data: DadosFuncionario!): Funcionario!
+    updateIdSession(idFuncionario: ID!, idSession: String!): Funcionario!
+    updateIdGoogle(idFuncionario: ID!, idGoogle: String!): Funcionario!
+    deleteFuncionario(idFuncionario: ID!): Boolean!
+    ativarFuncionario(idFuncionario: ID!, status: String!): Funcionario!
+}

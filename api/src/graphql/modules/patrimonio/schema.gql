@@ -1,0 +1,46 @@
+type Patrimonio{
+    idPatrimonio: ID!
+    marca: String!
+    modelo: String!
+    status: Int!
+    idBancada: Int!
+    tipo: String!
+}
+
+type Query{
+    patrimonios: [Patrimonio]!
+    patrimonio(idPatrimonio: ID!): Patrimonio!
+    patrimoniosByTipo(tipo: String!): [Patrimonio]!
+    patrimoniosByStatus(status: String!): [Patrimonio]!
+    patrimoniosByBancada(idBancada: Int!): [Patrimonio]!
+    patrimoniosByMarcaModelo(marca: String!, modelo: String!): [Patrimonio]!
+    searchPatrimonios(filter: PatrimonioFilter): [Patrimonio]
+    totalPatrimonios: Int!
+    totalPatrimoniosManutencao: Int!
+    totalPatrimoniosInoperantes: Int!
+}
+
+input PatrimonioFilter {
+  idPatrimonio: ID
+  marca: String
+  modelo: String
+  status: Int
+  idBancada: Int
+  tipo: String
+}
+
+input dadosPatrimonio{
+    idPatrimonio: ID!
+    marca: String!
+    modelo: String!
+    status: Int!
+    idBancada: Int!
+    tipo: String!
+}
+
+type Mutation{
+    createPatrimonio(data: dadosPatrimonio): Patrimonio!
+    updatePatrimonio(idPatrimonio: ID!, data: dadosPatrimonio): Patrimonio!
+    deletePatrimonio(idPatrimonio: ID!): Boolean!
+    ativarPatrimonio(idPatrimonio: ID!, status: String!): Patrimonio!
+}
